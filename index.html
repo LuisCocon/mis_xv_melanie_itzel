@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XVs</title>
+</head>
+<body>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('src/space.gif') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .contenido {
+            position: relative;
+            color: white;
+            text-align: center;
+            padding-top: 0%;
+        }
+        .overlay-container {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+        }
+        .overlay-container img {
+            max-width: 60%;
+            height: auto;
+            border: 3px solid rgb(196, 145, 44); /* Borde dorado */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra para darle un poco de profundidad */
+        }
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+        h1, h2 {
+            margin: 0;
+        }
+        .button {
+            padding: 15px 30px;
+            margin-top: 20px;
+            font-size: 20px;
+            color: white;
+            background-color: transparent;
+            border: 3px solid;
+            border-image-slice: 1;
+            border-width: 3px;
+            border-image-source: linear-gradient(45deg, gold, darkgoldenrod);
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .button:hover {
+            background-color: gold;
+            color: black;
+        }
+
+        /* Estilos Responsivos */
+        @media (max-width: 768px) {
+            .overlay-container img {
+                max-width: 80%; /* Ajustar el tamaño de la imagen en pantallas más pequeñas */
+            }
+            h1 {
+                font-size: 50px; /* Reducir el tamaño del texto en pantallas más pequeñas */
+            }
+            h2 {
+                font-size: 35px; /* Reducir el tamaño del texto en pantallas más pequeñas */
+            }
+            .button {
+                font-size: 18px; /* Reducir el tamaño del botón en pantallas más pequeñas */
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .overlay-container img {
+                max-width: 90%; /* Ajustar aún más el tamaño de la imagen en pantallas muy pequeñas */
+            }
+            h1 {
+                font-size: 40px; /* Reducir el tamaño del texto en pantallas muy pequeñas */
+            }
+            h2 {
+                font-size: 30px; /* Reducir el tamaño del texto en pantallas muy pequeñas */
+            }
+            .button {
+                font-size: 16px; /* Reducir el tamaño del botón en pantallas muy pequeñas */
+                padding: 8px 15px;
+            }
+        }
+    </style>
+
+    <div class="contenido">
+        <div class="overlay-container">
+            <img src="src/foto1.jpeg" alt="Foto de Melanie e Itzel">
+            <div class="overlay-text">
+                <h1>Bienvenidos a mis XV.</h1>
+                <h2>Itzel & Melanie.</h2>
+                <a href="http://mis-xv-melanie-itzel.lovestoblog.com/presentation.html" target="_parent"><button class="button">Entrar</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
