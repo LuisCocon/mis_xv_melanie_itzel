@@ -86,15 +86,13 @@
             transform: translate(-50%, -50%);
             color: white;
             text-align: center;
-            font-size: 24px;
-            
+            font-size: 18px;
             padding: 10px;
             border-radius: 5px;
         }
 
         .carousel {
             display: flex;
-            justify-content: center;
             overflow: hidden;
             width: 100%;
             max-width: 800px;
@@ -102,10 +100,13 @@
             border: 3px solid gold;
             border-radius: 10px;
             position: relative;
+            align-items: center;
         }
+
         .carousel img {
-            width: 100%;
+            width: 100%; /* Cada imagen ocupará todo el ancho del carrusel */
             height: auto;
+            flex-shrink: 0; /* Esto asegura que todas las imágenes mantengan el mismo tamaño */
             transition: transform 0.5s ease;
         }
         .carousel-buttons {
@@ -215,10 +216,10 @@
                 margin-bottom: 20px;
             }
             .image-text {
-                font-size: 13px; /* Ajusta este valor según sea necesario */
+            font-size: 18px; /* Ajusta este valor según sea necesario */
             }
             .button {
-                font-size: 11px; /* Ajusta el tamaño del botón en móviles */
+                font-size: 14px; /* Ajusta el tamaño del botón en móviles */
             }
         }
     </style>
@@ -260,18 +261,18 @@
         <div class="image-text-container">
             <div class="image-item">
                 <img src="src/back2.jpeg" alt="Ceremonia Religiosa">
-                <h2 class="image-text custom-font" style="padding-bottom:400px;">Misa</h2>
+                <h2 class="image-text custom-font" style="padding-bottom:330px;">Misa</h2>
                 <h2 class="image-text" style="padding-bottom:230px;">Parroquia de San Pio Décimo</h2>
-                <div class="image-text" style="margin-top:50px;">Calle Ote. 172 250, Moctezuma 2da Secc, Venustiano Carranza, 15530 Ciudad de México, CDMX.</div>
-                <a class="image-text" style="margin-top:180px;" href="https://maps.app.goo.gl/iSQjDcR6Ytxh9e6Q7" target="_parent"><button class="button">Ver Ubicación</button></a>
+                <div class="image-text" style="margin-top:30px;">Calle Ote. 172 250, Moctezuma 2da Secc, Venustiano Carranza, 15530 Ciudad de México, CDMX.</div>
+                <a class="image-text" style="margin-top:150px;" href="https://maps.app.goo.gl/iSQjDcR6Ytxh9e6Q7" target="_parent"><button class="button">Ver Ubicación</button></a>
 
             </div>
             <div class="image-item">
                 <img src="src/back2.jpeg" alt="Recepción">
-                <h2 class="image-text custom-font" style="padding-bottom:400px;">Recepción</h2>
+                <h2 class="image-text custom-font" style="padding-bottom:330px;">Recepción</h2>
                 <h2 class="image-text" style="padding-bottom:230px;">Salón de Eventos Mary Luz</h2>
-                <div class="image-text" style="margin-top:50px;">C. Transvaal 141, Romero Rubio, Venustiano Carranza, 15400 Ciudad de México, CDMX.</div>
-                <a class="image-text" style="margin-top:180px;" href="https://maps.app.goo.gl/HLwbsFzrojYxksbj8" target="_parent"><button class="button">Ver Ubicación</button></a>
+                <div class="image-text" style="margin-top:30px;">C. Transvaal 141, Romero Rubio, Venustiano Carranza, 15400 Ciudad de México, CDMX.</div>
+                <a class="image-text" style="margin-top:150px;" href="https://maps.app.goo.gl/HLwbsFzrojYxksbj8" target="_parent"><button class="button">Ver Ubicación</button></a>
             </div>
         </div>
     </div>
@@ -375,18 +376,19 @@
         const totalSlides = slides.length;
 
         function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.style.transform = `translateX(${100 * (i - index)}%)`;
+            const offset = index * -100; // Multiplicamos por -100 para desplazar cada imagen en el ancho del carrusel
+            slides.forEach((slide) => {
+                slide.style.transform = `translateX(${offset}%)`;
             });
         }
 
         function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
+            currentSlide = (currentSlide + 1) % totalSlides; // Si es la última imagen, vuelve al principio
             showSlide(currentSlide);
         }
 
         function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; // Va a la última imagen si es el primer slide
             showSlide(currentSlide);
         }
 
