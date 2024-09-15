@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XVs - Información</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('src/space.gif') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        h1, h2, h3, p {
+            text-align: center;
+            color: gold;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        h1.scrolled, h2.scrolled, h3.scrolled, p.scrolled {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .contenido {
+            position: relative;
+            color: white;
+            text-align: center;
+            padding-top: 0%;
+        }
+        .overlay-container {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+        }
+        .overlay-container img {
+            max-width: 100%;
+            height: auto;
+            border: 3px solid rgb(196, 145, 44); /* Borde dorado */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra para darle un poco de profundidad */
+        }
+        .overlay-text {
+            position: absolute;
+            padding-top: 250px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+        .section {
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        .location, .schedule, .itinerary {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para dos imágenes lado a lado */
+        .image-text-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .image-text-container .image-item {
+            position: relative;
+            width: 45%;
+        }
+        .image-text-container .image-item img {
+            width: 100%;
+            height: auto;
+            border: 3px solid rgb(196, 145, 44);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        .image-text-container .image-item .image-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 3px solid gold;
+            border-radius: 10px;
+            position: relative;
+            align-items: center;
+        }
+
+        .carousel img {
+            width: 100%; /* Cada imagen ocupará todo el ancho del carrusel */
+            height: auto;
+            flex-shrink: 0; /* Esto asegura que todas las imágenes mantengan el mismo tamaño */
+            transition: transform 0.5s ease;
+        }
+        .carousel-buttons {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .carousel-buttons button {
+            background-color: transparent;
+            border: 2px solid gold;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            color: gold;
+            font-size: 16px;
+        }
+        .carousel-buttons button:hover {
+            background-color: gold;
+            color: black;
+        }
+        .custom-font {
+        font-family: 'Peristiwa';
+        src: url('fonts/Peristiwa.otf'); /* replace with your desired font family */
+        font-size: 1.5rem; /* replace with your desired font size */
+        }
+        .button {
+            padding: 15px 30px;
+            margin-top: 20px;
+            font-size: 20px;
+            color: white;
+            background-color: transparent;
+            border: 3px solid;
+            border-image-slice: 1;
+            border-width: 3px;
+            border-image-source: linear-gradient(45deg, gold, darkgoldenrod);
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .button:hover {
+            background-color: gold;
+            color: black;
+        }
+        .form-group {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .form-group label {
+            font-size: 18px;
+            color: gold;
+        }
+        .form-group select, .form-group input, .form-group textarea {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid gold;
+            width: 100%;
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .form-group input[type="checkbox"] {
+            width: auto;
+        }
+        .submit-container {
+            text-align: center; /* Centra el botón */
+            margin-top: 20px;
+        }
+        .submit-button {
+            padding: 10px 20px;
+            border: 2px solid gold;
+            background-color: transparent;
+            color: gold;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .submit-button:hover {
+            background-color: gold;
+            color: black;
+        }
+        /* Estilos Responsivos */
+        @media (max-width: 768px) {
+            .section {
+                width: 90%;
+            }
+            h1 {
+                font-size: 30px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+            .carousel img {
+                max-height: 300px;
+            }
+            .carousel-buttons button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+            .image-text-container {
+                flex-direction: column;
+            }
+            .image-text-container .image-item {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+            .image-text {
+            font-size: 18px; /* Ajusta este valor según sea necesario */
+            }
+            .button {
+                font-size: 14px; /* Ajusta el tamaño del botón en móviles */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenido">
+        <div class="overlay-container">
+            <img src="src/carrusel-1.jpeg" alt="Foto de Melanie e Itzel">
+            <div class="overlay-text">
+                <h1>Itzel & Melanie.</h1>
+                <h2>¡Mis XVs!</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <p>¡Estamos emocionados de compartir</p>
+        <p>este día tan especial contigo!</p>
+        <p>Te invito a compartir la alegría</p>
+        <p>de cumplir mis XV años,</p>
+        <p>en compañía de mis papás.</p>
+        <h1>Carolina Morales Martinez.</h1>
+        <h2>&</h2>
+        <h1>Jacinto Vidal Dominguez.</h1>
+    </div>
+
+    <div class="section">
+        <p>También agradecemos el amor y</p>
+        <p>compañía de nuestros seres queridos,</p>
+        <p>principalmente de nuestras madrinas.</p>
+        <h1>Flor Camacho.</h1>
+        <h2>&</h2>
+        <h1>Fabiola Morales.</h1>
+    </div>
+
+    <div class="section schedule">
+        <!-- <h2>Horarios</h2> -->
+        <div class="image-text-container">
+            <div class="image-item">
+                <img src="src/back2.jpeg" alt="Ceremonia Religiosa">
+                <h2 class="image-text custom-font" style="padding-bottom:330px;">Misa</h2>
+                <h2 class="image-text" style="padding-bottom:230px;">Parroquia de San Pio Décimo</h2>
+                <div class="image-text" style="margin-top:30px;">Calle Ote. 172 250, Moctezuma 2da Secc, Venustiano Carranza, 15530 Ciudad de México, CDMX.</div>
+                <a class="image-text" style="margin-top:150px;" href="https://maps.app.goo.gl/iSQjDcR6Ytxh9e6Q7" target="_parent"><button class="button">Ver Ubicación</button></a>
+
+            </div>
+            <div class="image-item">
+                <img src="src/back2.jpeg" alt="Recepción">
+                <h2 class="image-text custom-font" style="padding-bottom:330px;">Recepción</h2>
+                <h2 class="image-text" style="padding-bottom:230px;">Salón de Eventos Mary Luz</h2>
+                <div class="image-text" style="margin-top:30px;">C. Transvaal 141, Romero Rubio, Venustiano Carranza, 15400 Ciudad de México, CDMX.</div>
+                <a class="image-text" style="margin-top:150px;" href="https://maps.app.goo.gl/HLwbsFzrojYxksbj8" target="_parent"><button class="button">Ver Ubicación</button></a>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="section schedule">
+        <!-- <h2>Horarios</h2> -->
+        <div class="image-text-container">
+            <div class="image-item">
+                <img src="src/cami.jpeg" alt="Ceremonia Religiosa">
+                <h1 class="image-text custom-font">¡Mis XV!</h1>
+                <div class="image-text" style="margin-top:80px;">Melanie Vidal</div>
+                <h1 class="image-text custom-font" style="margin-top:130px;">~Sábado~</h1>
+                <div class="image-text" style="margin-top:180px;">30</div>
+                <h1 class="image-text custom-font" style="margin-top:230px;">Noviembre</h1>
+                <div class="image-text" style="margin-top:280px;">2024</div>
+
+            </div>
+            <div class="image-item">
+                <img src="src/gio.jpeg" alt="Recepción">
+                <h1 class="image-text custom-font">¡Mis XV!</h1>
+                <div class="image-text" style="margin-top:80px;">Itzel Vidal</div>
+                <h1 class="image-text custom-font" style="margin-top:130px;">~Sábado~</h1>
+                <div class="image-text" style="margin-top:180px;">30</div>
+                <h1 class="image-text custom-font" style="margin-top:230px;">Noviembre</h1>
+                <div class="image-text" style="margin-top:280px;">2024</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section itinerary">
+        <h2>Itinerario</h2>
+        <h3>05:40 PM - Ceremonia Religiosa</h3>
+        <h3>08:00 PM - Llegada a la Recepción</h3>
+        <h3>09:00 PM - Cena</h3>
+        <h3>10:00 PM - Baile de Debutantes</h3>
+        <h3>11:30 PM - Brindis y Pastel</h3>
+        <h3>12:00 PM - Fiesta</h3>
+    </div>
+
+    <div class="section">
+        <h2>Galería de Fotos</h2>
+        <div class="carousel">
+            <img src="src/camicarru.jpeg" alt="Foto 1">
+            <img src="src/gracias1.jpeg" alt="Foto 2">
+            <img src="src/giocarru.jpeg" alt="Foto 3"> <!-- Añade más imágenes según sea necesario -->
+        </div>
+        <div class="carousel-buttons">
+            <button onclick="prevSlide()">Anterior</button>
+            <button onclick="nextSlide()">Siguiente</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Confirmación de Asistencia</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="guest-name">Nombre completo:</label>
+                <input type="text" id="guest-name" name="guest-name" placeholder="Escribe tu nombre completo" required>
+            </div>
+
+            <div class="form-group">
+                <label>¿Asistirás al evento?</label><br>
+                <input type="checkbox" id="yes" name="attendance" value="Si asistiré">
+                <label for="yes">Sí asistiré</label><br>
+                <input type="checkbox" id="no" name="attendance" value="No asistiré">
+                <label for="no">No asistiré</label>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Agrega una dedicatoria (opcional):</label>
+                <textarea id="comments" name="comments" rows="4" placeholder="Escribe tu dedicatoria aquí..."></textarea>
+            </div>
+
+            <div class="submit-container">
+                <button type="submit" class="submit-button">Enviar Confirmación</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Función para aplicar la animación al scrollear
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scrolled');
+                }
+            });
+        });
+
+        // Seleccionar todos los títulos y párrafos que queremos animar
+        const animatedElements = document.querySelectorAll('h1, h2, h3, p');
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Carrusel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel img');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            const offset = index * -100; // Multiplicamos por -100 para desplazar cada imagen en el ancho del carrusel
+            slides.forEach((slide) => {
+                slide.style.transform = `translateX(${offset}%)`;
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides; // Si es la última imagen, vuelve al principio
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; // Va a la última imagen si es el primer slide
+            showSlide(currentSlide);
+        }
+
+        // Mostrar la primera diapositiva
+        showSlide(currentSlide);
+
+        // Rotación automática del carrusel cada 5 segundos
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
